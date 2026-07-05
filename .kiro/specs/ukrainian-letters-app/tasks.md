@@ -75,8 +75,8 @@ Tasks are grouped into phases that build on each other: foundation first, then c
     - Wrap the entire app: `<SettingsProvider> ... </SettingsProvider>` as the outermost component
     - _Requirements: 4.8, 4.10_
 
-- [ ] 4. Utilities — sound manager and haptics manager
-  - [ ] 4.1 Create `/src/utils/soundManager.js`
+- [x] 4. Utilities — sound manager and haptics manager
+  - [x] 4.1 Create `/src/utils/soundManager.js`
     - Import `createAudioPlayer` from `expo-audio`
     - Manage two module-level player objects: `_sfxPlayer` and `_musicPlayer`
     - `playSfx(filename, isSoundEnabled)` — if `!isSoundEnabled` return immediately; resolve source from `/src/assets/audio/letters/<filename>` (fall back to `stub.mp3` require if filename is falsy); if `_sfxPlayer` already exists, call `_sfxPlayer.remove()` first; create a new player with `createAudioPlayer(source)`, call `.play()`, catch errors, log them, do not throw
@@ -87,10 +87,10 @@ Tasks are grouped into phases that build on each other: foundation first, then c
     - Pure utility — no `useContext` inside this file; settings values are passed as arguments by the caller
     - Note: `createAudioPlayer` returns a player that auto-loads; no explicit async load step needed
     - _Requirements: 2.1–2.4, 4.4–4.7, 5.3_
-  - [ ]* 4.2 Write unit tests for `soundManager.js` — `/tests/unit/soundManager.test.js`
+  - [x]* 4.2 Write unit tests for `soundManager.js` — `/tests/unit/soundManager.test.js`
     - Mock `expo-audio` (`createAudioPlayer` returns a mock with `.play()`, `.remove()`, `.loop` setter); test: does not throw when file missing; does not call play API when `isSoundEnabled` is false; calls play when enabled; calls remove + creates new player when called while a player already exists
     - _Requirements: 2.1–2.4_
-  - [ ] 4.3 Create `/src/utils/hapticsManager.js`
+  - [x] 4.3 Create `/src/utils/hapticsManager.js`
     - Import `Haptics` from `expo-haptics`
     - Export `pop(isVibrationEnabled)` — if `!isVibrationEnabled` return; call `Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)`
     - _Requirements: 3.3d, 3.6, 4.9_
