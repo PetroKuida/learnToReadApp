@@ -1,23 +1,19 @@
+import React from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 import { SettingsProvider } from './src/context/SettingsContext';
+import AppNavigator from './src/navigation/AppNavigator';
 
 export default function App() {
   return (
-    <SettingsProvider>
-      <View style={styles.container}>
-        <Text>Читайчик — coming soon!</Text>
-        <StatusBar style="auto" />
-      </View>
-    </SettingsProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SettingsProvider>
+        <NavigationContainer>
+          <AppNavigator />
+          <StatusBar style="light" />
+        </NavigationContainer>
+      </SettingsProvider>
+    </GestureHandlerRootView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

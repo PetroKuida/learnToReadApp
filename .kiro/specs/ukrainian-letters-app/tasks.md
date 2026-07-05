@@ -95,14 +95,14 @@ Tasks are grouped into phases that build on each other: foundation first, then c
     - Export `pop(isVibrationEnabled)` — if `!isVibrationEnabled` return; call `Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)`
     - _Requirements: 3.3d, 3.6, 4.9_
 
-- [ ] 5. Navigation — AppNavigator wiring all four screens
-  - [ ] 5.1 Create `/src/navigation/AppNavigator.js`
+- [x] 5. Navigation — AppNavigator wiring all four screens
+  - [x] 5.1 Create `/src/navigation/AppNavigator.js`
     - Import `createStackNavigator` from `@react-navigation/stack`
     - Register four screens: `Home → HomeScreen`, `Letters → LettersScreen`, `Settings → SettingsScreen`, `About → AboutScreen`
     - `screenOptions={{ headerShown: false }}` on the navigator — all screens own their own chrome
     - `initialRouteName="Home"`
     - _Requirements: 7.1, 14.1_
-  - [ ] 5.2 Update `App.js` to mount the navigation tree
+  - [x] 5.2 Update `App.js` to mount the navigation tree
     - Wrap with `NavigationContainer` inside `SettingsProvider`
     - Import and render `AppNavigator`
     - Tree: `<SettingsProvider> <NavigationContainer> <AppNavigator /> </NavigationContainer> </SettingsProvider>`
