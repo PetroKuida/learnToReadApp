@@ -29,17 +29,17 @@ Tasks are grouped into phases that build on each other: foundation first, then c
     - Add Jest config to `package.json` (preset: `jest-expo`, `transformIgnorePatterns` for RN modules)
     - _Requirements: 4.8, 4.10, 5.3_
 
-- [ ] 2. Foundation — theme, responsive, locale data, game mode registry, stub audio, settings storage
+- [x] 2. Foundation — theme, responsive, locale data, game mode registry, stub audio, settings storage
   - [ ] 2.1 Create `/src/utils/theme.js`
     - Export named constants: `COLORS` (background, primary, accent, text, bubbleBlue, white, overlay), `SPACING` (sm, md, lg, xl), `BORDER_RADIUS`
     - No inline values elsewhere — all colours reference this file
     - _Requirements: 6.2, 7.7_
-  - [ ] 2.2 Create `/src/utils/responsive.js`
+  - [x] 2.2 Create `/src/utils/responsive.js`
     - Import `Dimensions` from React Native; compute `width` once at module load (portrait lock — width is stable)
     - Export: `IS_TABLET` (width >= 600), `BUBBLE_SIZE` (tablet: `width * 0.55`, phone: `width * 0.72`), `LETTER_FONT_SIZE` (tablet: 144, phone: 96), `scale(size)` helper using base width 375
     - Export `MIN_TAP_TARGET = 48`
     - _Requirements: 12.1–12.5, 6.1_
-  - [ ] 2.3 Create `/src/data/locales/uk.js` — Ukrainian locale with all 33 letters
+  - [x] 2.3 Create `/src/data/locales/uk.js` — Ukrainian locale with all 33 letters
     - Export default object with shape: `{ id, languageName, strings, letters }`
     - `strings`: `appName`, `settingsTitle`, `aboutTitle`, `soundLabel`, `musicLabel`, `vibrationLabel`, `confirmStay`, `confirmMenu`, `aboutDescription`, `versionLabel`
     - `letters`: array of 33 objects `{ id, upper, lower, audioFile }` in correct Ukrainian alphabetical order:
@@ -47,16 +47,16 @@ Tasks are grouped into phases that build on each other: foundation first, then c
     - `audioFile` for each letter references the matching file in `/src/assets/audio/letters/` (e.g. `uk_a.mp3`); letters without a real recording reference `stub.mp3`
     - Export a named `STUB_AUDIO_FILE = 'stub.mp3'` constant from this file
     - _Requirements: 1.3, 2.5, 13.1–13.5_
-  - [ ] 2.4 Create `/src/data/gameModes.js` — Game Mode Registry
+  - [x] 2.4 Create `/src/data/gameModes.js` — Game Mode Registry
     - Export default array with one entry for MVP: `{ id: 'letters', displayName: 'Літери', enabled: true, isPremium: false, freeLetterCount: null, screen: 'Letters' }`
     - `freeLetterCount: null` means all letters are available (fully free mode)
     - Future premium modes will set `freeLetterCount: N` to limit preview to first N letters
     - _Requirements: 8.1–8.9, 16.1–16.7_
-  - [ ] 2.5 Add stub audio placeholder at `/src/assets/audio/stub.mp3`
+  - [x] 2.5 Add stub audio placeholder at `/src/assets/audio/stub.mp3`
     - Copy or generate a short silent `.mp3` file (≤1 second) and place it at this path
     - This is the only audio asset required to unblock development; real letter recordings are added later
     - _Requirements: 2.5, 5.3_
-  - [ ] 2.6 Create `/src/utils/settingsStorage.js`
+  - [x] 2.6 Create `/src/utils/settingsStorage.js`
     - Import `AsyncStorage` from `@react-native-async-storage/async-storage`
     - Define `KEYS` constant object: `SOUND: '@settings/sound'`, `MUSIC: '@settings/music'`, `VIBRATION: '@settings/vibration'`
     - Export `readSetting(key)` — async, returns `boolean` (default `true` on missing key or parse error, logs error)
@@ -64,14 +64,14 @@ Tasks are grouped into phases that build on each other: foundation first, then c
     - No direct AsyncStorage calls anywhere else in the codebase
     - _Requirements: 4.8, 4.10_
 
-- [ ] 3. SettingsContext — global settings state with AsyncStorage persistence
-  - [ ] 3.1 Create `/src/context/SettingsContext.js`
+- [x] 3. SettingsContext — global settings state with AsyncStorage persistence
+  - [x] 3.1 Create `/src/context/SettingsContext.js`
     - Create context with default shape: `{ isSoundEnabled, isMusicEnabled, isVibrationEnabled, toggleSound, toggleMusic, toggleVibration }`
     - `SettingsProvider` component: on mount, read all three keys from `settingsStorage` in parallel (`Promise.all`), set state; fall back to `true` for each on error
     - Each toggle function: flip the boolean in state → immediately call `writeSetting` (fire-and-forget, log errors)
     - Export `SettingsProvider` and `useSettings` convenience hook (`useContext(SettingsContext)`)
     - _Requirements: 4.1–4.10_
-  - [ ] 3.2 Wire `SettingsProvider` into `App.js`
+  - [x] 3.2 Wire `SettingsProvider` into `App.js`
     - Wrap the entire app: `<SettingsProvider> ... </SettingsProvider>` as the outermost component
     - _Requirements: 4.8, 4.10_
 
